@@ -2,33 +2,49 @@ import { ReactElement } from "react";
 
 import { Idea } from "../../types";
 
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import { Divider } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  Typography,
+  Divider,
+  CardContent,
+} from "@mui/material";
 
 interface Props {
   idea: Idea;
 }
 
 function IdeaCard({ idea }: Props): ReactElement {
+  const onClickHandler = () => {
+    console.log(idea.idea, idea.category);
+  };
+
   return (
     <Card
       key={idea.idea}
-      sx={{ maxWidth: 200, minWidth: 100, p: 2 }}
       variant="outlined"
+      sx={{ maxWidth: 200, minWidth: 120 }}
     >
-      <Typography gutterBottom variant="body1" component="div">
-        {idea.idea}
-      </Typography>
-
-      {idea.category && (
-        <>
-          <Divider />
-          <Typography variant="h6" color="text.primary">
-            {idea.category}
+      <CardActionArea onClick={onClickHandler}>
+        <CardContent>
+          <Typography gutterBottom variant="body1" component="div">
+            {idea.idea}
           </Typography>
-        </>
-      )}
+
+          {idea?.category && (
+            <>
+              <Divider />
+              <Typography
+                sx={{ width: "100%" }}
+                variant="h6"
+                color="text.primary"
+              >
+                {idea.category}
+              </Typography>
+            </>
+          )}
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 }

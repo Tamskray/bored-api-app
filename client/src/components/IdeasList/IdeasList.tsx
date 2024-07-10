@@ -1,31 +1,51 @@
 import { ReactElement } from "react";
 
+import useFetch from "../../hooks/useFetch";
+
 import { Idea } from "../../types";
 
 import IdeaCard from "../Card/IdeaCard";
+import SkeletonList from "./SkeletonList";
 
-import Stack from "@mui/material/Stack";
+import { Stack, Button, Typography } from "@mui/material";
 
 interface Props {
   title: string;
-  data: Idea[];
+  data?: Idea[];
 }
 
 const IdeasList = ({ title, data }: Props): ReactElement => {
+  const { data: freshIdeas, isLoading, error, request } = useFetch("");
+
+  const getNewIdeasHandler = () => {
+    request();
+  };
+
+  if (isLoading) {
+    return <SkeletonList title={title} />;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <>
-      <h2>{title}</h2>
+      <Typography variant="h5">{title}</Typography>
       <Stack
-        spacing={{ xs: 2, md: 4 }}
+        spacing={{ xs: 1, md: 4 }}
         direction={{ xs: "column", sm: "row" }}
         justifyContent="center"
         alignItems="center"
-        m={2}
+        m={1}
       >
-        {data.map((idea) => (
-          <IdeaCard idea={idea} />
+        {freshIdeas.map((idea) => (
+          <IdeaCard key={idea.idea} idea={idea} />
         ))}
       </Stack>
+      <Button onClick={getNewIdeasHandler} variant="contained" size="large">
+        Get New Ideas
+      </Button>
     </>
   );
 };
