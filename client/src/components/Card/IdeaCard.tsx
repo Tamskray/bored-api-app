@@ -12,11 +12,13 @@ import {
 
 interface Props {
   idea: Idea;
+  ideaClickHandler: (idea: Idea) => void;
 }
 
-function IdeaCard({ idea }: Props): ReactElement {
+function IdeaCard({ idea, ideaClickHandler }: Props): ReactElement {
   const onClickHandler = () => {
-    console.log(idea.idea, idea.category);
+    // console.log(idea.idea, idea.category);
+    ideaClickHandler(idea);
   };
 
   return (

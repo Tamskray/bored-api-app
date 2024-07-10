@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import {
   Button,
   CircularProgress,
+  Divider,
   Skeleton,
   Stack,
   Typography,
@@ -32,6 +33,7 @@ const SkeletonList = ({ title }: Props): ReactElement => {
       <Button variant="contained" size="large">
         Get New Ideas
       </Button>
+      <Divider sx={{ m: 3 }} />
     </>
   );
 };

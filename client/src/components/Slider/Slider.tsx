@@ -12,15 +12,20 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Divider,
 } from "@mui/material";
 
 interface Props {
   data: Idea[];
+  myIdeaClickHandler: (idea: Idea) => void;
 }
 
 type Direction = "right" | "left" | undefined;
 
-const Slider = ({ data: myDumbIdeaList }: Props): ReactElement => {
+const Slider = ({
+  data: myIdeasList,
+  myIdeaClickHandler,
+}: Props): ReactElement => {
   const [cards, setCards] = useState<ReactElement[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [slideDirection, setSlideDirection] = useState<Direction>("left");
@@ -30,34 +35,47 @@ const Slider = ({ data: myDumbIdeaList }: Props): ReactElement => {
 
   const cardsPerPage = isSmallScreen ? 1 : 3;
 
-  const totalPages = Math.ceil(myDumbIdeaList.length / cardsPerPage);
+  const totalPages = Math.ceil(myIdeasList.length / cardsPerPage);
 
-  const duplicateCards = myDumbIdeaList.map((idea) => (
-    <IdeaCard key={idea.idea} idea={idea} />
+  const duplicateCards = myIdeasList.map((idea) => (
+    <IdeaCard
+      key={idea.idea}
+      idea={idea}
+      ideaClickHandler={myIdeaClickHandler}
+    />
   ));
 
   useEffect(() => {
     setCards(duplicateCards);
-  }, []);
+
+    if (duplicateCards.length > 0) setCurrentPage(0);
+  }, [myIdeasList]);
 
   useEffect(() => {
-    const maxPage = Math.ceil(myDumbIdeaList.length / cardsPerPage) - 1;
+    const maxPage = Math.ceil(myIdeasList.length / cardsPerPage) - 1;
     if (currentPage > maxPage) {
       setCurrentPage(maxPage);
     }
-  }, [cardsPerPage, currentPage, myDumbIdeaList.length]);
+  }, [cardsPerPage, currentPage, myIdeasList.length]);
 
   const nextPageHandler = () => {
     setSlideDirection("left");
-    // setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1));
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const prevPageHandler = () => {
     setSlideDirection("right");
-    // setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
     setCurrentPage((prevPage) => prevPage - 1);
   };
+
+  if (myIdeasList.length === 0) {
+    return (
+      <>
+        <Typography variant="h5">Ideas in my list</Typography>
+        <Typography variant="body1">List is empty for now</Typography>
+      </>
+    );
+  }
 
   return (
     <>
@@ -69,7 +87,7 @@ const Slider = ({ data: myDumbIdeaList }: Props): ReactElement => {
           alignItems: "center",
           alignContent: "center",
           justifyContent: "center",
-          height: "150px",
+          height: "170px",
           overflowX: "hidden",
         }}
       >
@@ -90,8 +108,8 @@ const Slider = ({ data: myDumbIdeaList }: Props): ReactElement => {
               <Stack
                 spacing={2}
                 direction="row"
-                alignContent="center"
-                justifyContent="center"
+                // alignContent="center"
+                // justifyContent="center"
               >
                 {cards.slice(
                   pageIndex * cardsPerPage,
@@ -111,6 +129,7 @@ const Slider = ({ data: myDumbIdeaList }: Props): ReactElement => {
       <Typography variant="body1" color="text.primary">
         {currentPage + 1}/{totalPages}
       </Typography>
+      <Divider sx={{ m: 3 }} />
     </>
   );
 };
