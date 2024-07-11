@@ -12,4 +12,4 @@ export const formatTime = (date: Date): string => {
     if (diffInDays < 7) return `${diffInDays} days ago`;
   
     return `${Math.floor(diffInDays / 7)} weeks ago`;
-  };
+};

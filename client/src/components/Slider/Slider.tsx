@@ -13,11 +13,13 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 
 interface Props {
   data: Idea[];
   myIdeaClickHandler: (idea: Idea) => void;
+  loadingStorage: boolean;
 }
 
 type Direction = "right" | "left" | undefined;
@@ -25,6 +27,7 @@ type Direction = "right" | "left" | undefined;
 const Slider = ({
   data: myIdeasList,
   myIdeaClickHandler,
+  loadingStorage,
 }: Props): ReactElement => {
   const [cards, setCards] = useState<ReactElement[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -44,6 +47,8 @@ const Slider = ({
       ideaClickHandler={myIdeaClickHandler}
     />
   ));
+
+  const title = "Ideas in my list";
 
   useEffect(() => {
     setCards(duplicateCards);
@@ -68,18 +73,28 @@ const Slider = ({
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
+  if (loadingStorage) {
+    return (
+      <>
+        <Typography variant="h5">{title}</Typography>
+        <CircularProgress />
+      </>
+    );
+  }
+
   if (myIdeasList.length === 0) {
     return (
       <>
-        <Typography variant="h5">Ideas in my list</Typography>
-        <Typography variant="body1">List is empty for now</Typography>
+        <Typography variant="h5">{title}t</Typography>
+        <Typography variant="body1">The list is empty for now</Typography>
+        <Divider sx={{ m: 3 }} />
       </>
     );
   }
 
   return (
     <>
-      <Typography variant="h5">Ideas in my list</Typography>
+      <Typography variant="h5">{title}</Typography>
       <Box
         sx={{
           display: "flex",

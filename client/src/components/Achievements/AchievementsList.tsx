@@ -2,18 +2,54 @@ import { ReactElement } from "react";
 
 import { Achievements } from "../../types";
 
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 interface Props {
   achievements: Achievements;
+  loadingStorage: boolean;
 }
 
-const AchievementsList = ({ achievements }: Props): ReactElement => {
+const AchievementsList = ({
+  achievements,
+  loadingStorage,
+}: Props): ReactElement => {
+  const title = "Achievements";
+
+  if (loadingStorage) {
+    return (
+      <>
+        <Typography variant="h5">{title}</Typography>
+        <CircularProgress />
+      </>
+    );
+  }
+
+  if (Object.keys(achievements).length === 0) {
+    return (
+      <>
+        <Typography variant="h5" marginBottom={2}>
+          {title}
+        </Typography>
+        <Typography variant="body1" marginBottom={2}>
+          No Achievements yet
+        </Typography>
+        <Divider sx={{ m: 3 }} />
+      </>
+    );
+  }
+
   return (
     <>
       <Box sx={{ mt: 2 }}>
         <Typography gutterBottom variant="h5">
-          Achievements
+          {title}
         </Typography>
         <Grid container spacing={2} justifyContent="center">
           {Object.entries(achievements).map(([category, count]) => (
