@@ -51,13 +51,15 @@ npm run dev
 ```
 
 ## Overview
+
 Here are some screenshots of the application:
-![General](https://drive.google.com/file/d/1nV0cFimtA7_VWUIM_4y6Bl1sVJwmGJN2/view?usp=drive_link)
 
-![Table](https://drive.google.com/file/d/1T_m0jgPc5Vphkt1rUpzMJTqjbQny2gI7/view?usp=drive_link)
+![General](https://drive.google.com/uc?export=view&id=1nV0cFimtA7_VWUIM_4y6Bl1sVJwmGJN2)
 
-![General-Mobile](https://drive.google.com/file/d/1PLexEDfMxs6R7t0Xi3caQ_a3H_cQVqZ0/view?usp=drive_link)
+![Table](https://drive.google.com/uc?export=view&id=1T_m0jgPc5Vphkt1rUpzMJTqjbQny2gI7)
 
-![Save-Pull](https://drive.google.com/file/d/1isx3-qEvQ1MmswdznsRFrGQTNB5Wc9na/view?usp=drive_link)
+![General-Mobile](https://drive.google.com/uc?export=view&id=1PLexEDfMxs6R7t0Xi3caQ_a3H_cQVqZ0)
 
-![Mongo](https://drive.google.com/file/d/1YhfYvc8_CnuB_ze3SHck_-N8AKisLAeV/view?usp=drive_link)
+![Save-Pull](https://drive.google.com/uc?export=view&id=1isx3-qEvQ1MmswdznsRFrGQTNB5Wc9na)
+
+![Mongo](https://drive.google.com/uc?export=view&id=1YhfYvc8_CnuB_ze3SHck_-N8AKisLAeV)
