@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { CompletedChallenge } from "../../types";
 
-import { formatTime } from "../../utils";
+import { formatTime } from "../../utils/formatTime";
 
 import {
   Table,

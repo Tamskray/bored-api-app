@@ -17,7 +17,6 @@ interface Props {
 
 function IdeaCard({ idea, ideaClickHandler }: Props): ReactElement {
   const onClickHandler = () => {
-    // console.log(idea.idea, idea.category);
     ideaClickHandler(idea);
   };
 
