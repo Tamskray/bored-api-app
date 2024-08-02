@@ -1,4 +1,4 @@
-# Extrums Test Assignment
+# Bored API App
 
 This application is developed to manage and track ideas, achievements and completed challenges. The data is stored locally in the browser and can be synced with the database. The application consists of frontend and backend parts.
 
